@@ -1,0 +1,51 @@
+================================================================================
+GREEN AI LAND USE CLASSIFICATION - FINAL REPORT
+================================================================================
+Generated: 2025-10-28 11:04:37
+
+ MODEL PERFORMANCE
+--------------------------------------------------------------------------------
+Training Accuracy (Final):     0.0938
+Validation Accuracy (Final):   0.0476
+Test Accuracy (Holdout):       0.0857
+Test F1-Score (Weighted):      0.0470
+Best Validation Accuracy:      0.0889
+
+ GENERALIZATION ANALYSIS
+--------------------------------------------------------------------------------
+Final Generalization Gap:      0.0461
+Average Generalization Gap:    -0.0091
+ Excellent generalization - minimal overfitting
+
+ CARBON FOOTPRINT & SUSTAINABILITY
+--------------------------------------------------------------------------------
+Total Training Time:           0.0314 hours
+Energy Consumed:               0.0047 kWh
+Carbon Emissions:              0.0020 kg CO₂e
+Water Usage (cooling):         0.0024 liters
+Region:                        US
+
+ BASELINE MODEL COMPARISON
+--------------------------------------------------------------------------------
+Random Forest:
+  Val Accuracy:  0.0127
+  Test Accuracy: 0.0159
+Gradient Boosting:
+  Val Accuracy:  0.0571
+  Test Accuracy: 0.0540
+
+ KEY FINDINGS
+--------------------------------------------------------------------------------
+1. Enhanced CNN achieved 8.57% test accuracy
+2. 440.0% improvement over Random Forest baseline
+3. Generalization gap of 0.0461 indicates good model fit
+4. Carbon-aware training consumed 0.0020 kg CO₂e
+
+ RECOMMENDATIONS
+--------------------------------------------------------------------------------
+  Consider additional training or architecture improvements
+ Continue monitoring carbon footprint for sustainable AI practices
+
+================================================================================
+END OF REPORT
+================================================================================

@@ -1,0 +1,28 @@
+{
+  "test_accuracy": 0.08571428571428572,
+  "test_f1_score": 0.046985186326346524,
+  "classification_report": "                   precision    recall  f1-score   support\n\n     agricultural     0.0000    0.0000    0.0000        15\n         airplane     0.0000    0.0000    0.0000        15\n  baseballdiamond     0.0000    0.0000    0.0000        15\n            beach     0.0000    0.0000    0.0000        15\n        buildings     0.0000    0.0000    0.0000        15\n        chaparral     0.0000    0.0000    0.0000        15\n denseresidential     0.0000    0.0000    0.0000        15\n           forest     0.5000    0.6667    0.5714        15\n          freeway     0.0588    0.1333    0.0816        15\n       golfcourse     0.0000    0.0000    0.0000        15\n           harbor     0.0000    0.0000    0.0000        15\n     intersection     0.0000    0.0000    0.0000        15\nmediumresidential     0.0000    0.0000    0.0000        15\n   mobilehomepark     0.0000    0.0000    0.0000        15\n         overpass     0.0000    0.0000    0.0000        15\n       parkinglot     0.0000    0.0000    0.0000        15\n            river     0.1000    0.1333    0.1143        15\n           runway     0.5000    0.0667    0.1176        15\nsparseresidential     0.0543    0.8000    0.1017        15\n     storagetanks     0.0000    0.0000    0.0000        15\n      tenniscourt     0.0000    0.0000    0.0000        15\n\n         accuracy                         0.0857       315\n        macro avg     0.0578    0.0857    0.0470       315\n     weighted avg     0.0578    0.0857    0.0470       315\n",
+  "per_class_accuracy": {
+    "agricultural": 0.0,
+    "airplane": 0.0,
+    "baseballdiamond": 0.0,
+    "beach": 0.0,
+    "buildings": 0.0,
+    "chaparral": 0.0,
+    "denseresidential": 0.0,
+    "forest": 0.6666666666666666,
+    "freeway": 0.13333333333333333,
+    "golfcourse": 0.0,
+    "harbor": 0.0,
+    "intersection": 0.0,
+    "mediumresidential": 0.0,
+    "mobilehomepark": 0.0,
+    "overpass": 0.0,
+    "parkinglot": 0.0,
+    "river": 0.13333333333333333,
+    "runway": 0.06666666666666667,
+    "sparseresidential": 0.8,
+    "storagetanks": 0.0,
+    "tenniscourt": 0.0
+  }
+}

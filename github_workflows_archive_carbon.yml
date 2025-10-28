@@ -1,0 +1,62 @@
+
+name: Archive CodeCarbon & Model Card
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  archive_artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install codecarbon reportlab markdown python-docx
+
+      - name: Run training (example)
+        # Replace this step with your actual training script that produces codecarbon logs and model_card.md
+        run: |
+          echo "Running example training script..."
+          # Example: python train.py --output-logs logs/
+          # Ensure your training script writes CodeCarbon JSON to logs/codecarbon.json and model_card.md to docs/
+
+      - name: Convert model_card.md to PDF
+        run: |
+          pip install reportlab markdown python-docx
+          python - <<'PY'
+import sys, os
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import getSampleStyleSheet
+md_path = 'docs/model_card.md'
+out_pdf = 'docs/model_card.pdf'
+# Very small conversion: include markdown as plain text
+with open(md_path, 'r', encoding='utf-8') as f:
+    text = f.read()
+styles = getSampleStyleSheet()
+doc = SimpleDocTemplate(out_pdf, pagesize=A4)
+story = [Paragraph('Model Card', styles['Title']), Spacer(1,12)]
+for line in text.split('\n\n'):
+    story.append(Paragraph(line.replace('\n','<br/>'), styles['Normal']))
+    story.append(Spacer(1,6))
+doc.build(story)
+print('Saved', out_pdf)
+PY
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: model-card-and-carbon-logs
+          path: |
+            docs/model_card.md
+            docs/model_card.pdf
+            logs/codecarbon.json
