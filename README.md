@@ -25,27 +25,23 @@ Our empirical findings indicate that (i) engineered lightweight models and trans
 
 <p>Our work presents a modular, end-to-end ML pipeline for remote-sensing classification in which efficiency and carbon accountability are built in at every stage (see Figs. 1.1–1.12). First, data ingestion uses a chunked I/O loader that reads image slices and resizes them on-the-fly at half precision (float16), dramatically lowering memory usage and data-transfer energy cost. Second, an extensible feature-engineering stage (mean/std RGB, gradient and texture statistics, PCA) produces low-dimensional inputs for classical classifiers (random forest, gradient boosting) trained in parallel under the same compute budget as the neural models. Third, the core modeling component comprises several lightweight CNN architectures: a custom micro-CNN (~12K parameters; see Fig. 1.11) and transfer-learning variants (EfficientNetB0, MobileNetV2), alongside a larger baseline CNN. All models are trained with consistent best practices (data augmentation, fixed seeds, learning-rate schedules, early stopping) to ensure reproducibility. Fourth, carbon and resource tracking is embedded throughout: we integrate CodeCarbon (with an independent CarbonTracker validation) to log instantaneous power draw, cumulative kWh, and CO₂e emissions for every experiment. Finally, we evaluate all models on stratified holdout sets using a full suite of diagnostics (ROC and precision–recall curves, macro-F1, per-class precision/recall, and confusion matrices as in Figs. 1.4–1.9) and generate standardized reports of both performance and environmental impact. In combination, these elements ensure that our pipeline not only achieves high accuracy but also produces fully transparent, reproducible documentation of energy use and emissions.
   
-<p>7.2. Integrated Design Enables Sustainable High-Performance Remote Sensing</p>
+<h1><p>7.2. Integrated Design Enables Sustainable High-Performance Remote Sensing</p></h1>
 
 Our experiments show that high accuracy and low environmental impact are compatible when models and systems are co-designed for efficiency. For example, the Micro-CNN attained ~91% of the baseline CNN’s accuracy while consuming only ~14% of the energy; transfer-learning models reached >97% of baseline accuracy with roughly 25–30% of its energy [1]. These holdout-set results (Figs. 1.4–1.5) confirm that lightweight, well-engineered models can capture most of the useful signal at a fraction of the cost. The per-class confusion matrices (Figs. 1.7–1.9) likewise show balanced performance across categories, indicating no systematic loss of predictive power. Crucially, the carbon impact benchmarks (Fig. 1.10) quantify the payoff: classical models emitted only ~0.003–0.005 kg CO₂e per run versus ~0.079 kg for the large CNN baseline (a >20× reduction)[2]. This dramatic variation underscores that environmental cost must be weighed alongside accuracy. In sum, our results empirically substantiate the core argument that “Green AI” is achievable: by deliberately integrating low-impact training configurations (chunked loading, float16) and hardware-aware efficiency, we attain near-baseline performance with greatly reduced emissions. These findings align with recent calls for balancing performance and energy use in ML [16], and they demonstrate the practical viability of Pareto-efficient model design in remote sensing (i.e., maximizing accuracy per watt).
 
-<p>7.3. Toward a Transparent, Carbon-Accountable AI Research Community</p>
+<h1><p>7.3. Toward a Transparent, Carbon-Accountable AI Research Community</p></h1>
 
 <p>Finally, we issue a call to action: the research community must adopt transparency and sustainability as fundamental values. Researchers should embed carbon and resource reports in every ML paper (e.g. using tools like CodeCarbon) so that claimed gains are accompanied by their environmental costs[16][21]. Model selection should favor Pareto-efficient architectures (as advocated by Dwivedi and Islam[16]), and publications should report energy per epoch, training time, and CO₂e alongside accuracy. We also echo recent literature urging more open infrastructure for “Green AI”: for example, Ghamisi et al. [21] emphasize clear accountability for Earth-observation AI, and Alghieth [4] calls for integrating carbon metrics in AI frameworks. There is a pressing need for tools and templates that lower the barrier for smaller labs to engage in sustainable modeling[37]; our open-source code, standardized logging, and reporting templates are concrete contributions toward this goal. By making resource usage public and developing lightweight, energy-efficient models, we can democratize AI research for low-resource institutions (in line with the equity goals of accessible green innovation[37]).</p>
 
 <p>In summary, this study fills critical gaps in current practice (the “accounting chasm” of unreported carbon[4], the siloed focus on accuracy over efficiency) by providing a fully documented, carbon-tracked pipeline and open benchmarks. We have shown that environmental impact need not be an afterthought, and we have equipped the community with reproducible tools and guidelines. Going forward, we encourage scholars to build on this work by prioritizing reproducibility and equity in all Green AI efforts: report full environmental metrics, share code and logs, and design models for shared benefit. Only by aligning our technical advances with transparency and sustainability can AI fulfill its promise for environmental science[1][16][21][43].</p>
 
-<p>Acknowledgments</p>
+<h1><p>Acknowledgments</p></h1>
 
 <p>Green Reliable Software Budapest. Kaggle Community Olympiad - HACK4EARTH Green AI. https://kaggle.com/competitions/kaggle-community-olympiad-hack-4-earth-green-ai, 2025. Kaggle.
-Yi Yang and Shawn Newsam, "Bag-Of-Visual-Words and Spatial Extensions for Land-Use Classification," ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems (ACM GIS), 2010. 
-Shawn D. Newsam
-Assistant Professor and Founding Faculty
-Electrical Engineering & Computer Science
-University of California, Merced
-Email: snewsam@ucmerced.edu
-Web: http://faculty.ucmerced.edu/snewsam
-</p>
+Yi Yang and Shawn Newsam, "Bag-Of-Visual-Words and Spatial Extensions for Land-Use Classification," ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems (ACM GIS), 2010. </p>
+
+<p>Shawn D. Newsam Assistant Professor and Founding Faculty Electrical Engineering & Computer Science University of California, Merced Email: s****@ucmerced.edu 
+Web: http://faculty.ucmerced.edu/snewsam </p>
 
 
 
