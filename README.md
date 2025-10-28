@@ -21,24 +21,7 @@ Detailed Breakdown of the Components
 •	Axes:
 o	Y-Axis (Accuracy): Ranges from 0.1 to 0.7. Accuracy is the proportion of correct predictions made by the model. A value of 1.0 (or 100%) is perfect.
 o	X-Axis (Epoch): Ranges from 0 to 25. An epoch is one complete pass of the entire training dataset through the learning algorithm.
-•	Lines:
-o	Train Accuracy (Solid Line): This shows the model's performance on the data it is actively learning from.
-o	Val Accuracy (Dashed Line): This shows the model's performance on a separate, unseen "validation" dataset, which is used to check how well the model generalizes.
-•	Key Observation and Interpretation:
-o	Divergence and Overfitting: At around epoch 10, a significant gap emerges between the two lines. The Training Accuracy continues to climb steadily, while the Validation Accuracy plateaus and then becomes highly unstable (volatile).
-o	This is the classic sign of overfitting. The model is memorizing the training data rather than learning its underlying patterns. The volatile validation accuracy indicates that the model's predictions on new data are unreliable.
-o	Best Epoch (24): The study identifies Epoch 24 as the best, with a Best Validation Accuracy of 0.6667 (or 66.67%). This is a critical point. Researchers would have saved the model's weights from this epoch to use for future predictions, as it represents the point just before overfitting became too severe. The fact that the best accuracy is only 66.67% suggests the model's performance is mediocre at best.
-2. Model Loss Plot (Bottom Half)
-•	Axes:
-o	Y-Axis (Loss): The values are not explicitly numbered, but loss represents the error between the model's prediction and the actual truth. The goal is to minimize loss.
-o	X-Axis (Epoch): Continues from the top plot.
-•	Lines:
-o	Train Loss (Solid Line): The error on the training set.
-o	Val Loss (Dashed Line): The error on the validation set.
-•	Key Observation and Interpretation:
-o	Mirroring Overfitting: The loss plot confirms the story from the accuracy plot. After an initial decrease, the Validation Loss begins to increase sharply from around epoch 10, while the Training Loss continues to decrease.
-o	This means that as training progresses, the model is making more and more mistakes on the validation data, even as it gets "better" at the training data. This is the loss-based signature of overfitting.
-3. Environmental Footprint
+• Environmental Footprint
 This section quantifies the computational resources consumed during the training process, which is an increasingly important consideration in AI research.
 •	Energy: 0.0982 kWh - The total electrical energy used. This is relatively low, suggesting the model was not extremely large or wasn't trained for a very long time.
 •	CO₂: 0.0508 kN - Note: 'kN' (kiloNewtons) is a unit of force, not carbon emissions. This is likely a unit error in the source file and should probably be kgCO₂eq (kilograms of carbon dioxide equivalent). This represents the carbon footprint associated with the electricity used.
