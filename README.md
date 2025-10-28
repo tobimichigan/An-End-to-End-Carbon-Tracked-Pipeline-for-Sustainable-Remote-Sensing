@@ -13,13 +13,107 @@ Our empirical findings indicate that (i) engineered lightweight models and trans
 <p><img width="2232" height="744" alt="Fig 1 1 Training_History" src="https://github.com/user-attachments/assets/891c95f2-4e87-4dce-98fe-141b9f1acdd9" /></p>
 
 <p><img width="1990" height="1786" alt="Fig 1 6 eda_analysis" src="https://github.com/user-attachments/assets/fca124aa-6bc0-475b-b603-607a47c04e1b" /> </p>
+
+<p>Exploratory Data Analysis for this research:</p>
+
+Training history reveals how early stopping was effective, how many epochs were necessary (which directly affects energy consumption), and whether mixed-precision (float16) or chunked I/O introduced instability. Shorter, stable training runs reduce cumulative kWh and CO₂e logged by CodeCarbon.
+Practical takeaways:
+- Use early stopping thresholds to avoid wasted epochs.
+- Monitor validation loss for noisy behavior that could require smoother LR schedules or larger batch sizes.
+</p>
 <p></p><img width="872" height="451" alt="Fig  1 10 Real Carbon Emission Comparison (CodeCarbon)" src="https://github.com/user-attachments/assets/a7c137f1-b4b8-4e0b-8cd5-2ede286bbccb" /></p>
-<p></p><img width="1961" height="1780" alt="Fig  1 9 Dataset Normalized Confusion Matrix" src="https://github.com/user-attachments/assets/74e4b149-809a-4992-a8be-edb39d3bf2ee" /></p>
+<p>What Fig  1.10 Real Carbon Emission Comparison (CodeCarbon) shows:
+For multi-class classification, one-vs-rest ROC and PR curves plot per-class discriminative performance by treating each class as the positive class against all others. The ROC curve shows true positive rate (TPR) vs. false positive rate (FPR) while the PR curve shows precision vs. recall.
+Applications:
+- ROC AUC near 1.0 indicates excellent ranking across thresholds. However, ROC can be optimistic with class imbalance.
+- PR curves are more informative for lower-prevalence classes — a high area under the PR curve (average precision) indicates high precision at useful recall levels.
+- Compare curves across classes to see which categories the baseline network favors or struggles with.
+Why it matters for this research:
+Baseline networks often set the performance ceiling. Fig. 1.2 documents where the baseline achieves strong discrimination and which classes are problematic. Coupled with carbon metrics, these curves help decide whether a marginal AUC improvement justifies additional CO₂e.
+Practical takeaways:
+- Prefer PR metrics for imbalanced categories.
+- Identify classes with low AP (average precision) for targeted augmentation or architecture tweaks.
+</p>
+
+<p></p><img width="1961" height="1780" alt="Fig  1.9 Dataset Normalized Confusion Matrix" src="https://github.com/user-attachments/assets/74e4b149-809a-4992-a8be-edb39d3bf2ee" /></p>
+<p>What Fig  1.9 Dataset Normalized Confusion Matrix shows:
+A normalized confusion matrix displays percentages rather than raw counts (rows normalized to 100% true-class examples). It is the preferred view for balanced interpretation across classes.
+How to read it:
+- Each row sums to 100% and shows the distribution of predicted labels for a given true class.
+- High off-diagonal percentages indicate class-level weaknesses independent of prevalence.
+Implications for this research:
+Normalization is essential when comparing model behavior across classes of different sizes. It helps isolate per-class recall and common confusions that might be masked by imbalance.
+Practical takeaways:
+- Use normalized matrices to prioritize per-class improvements.
+- Combine normalized views with absolute counts to assess both prevalence and per-class reliability.
+</p>
 <p></p><img width="1103" height="1005" alt="Fig  1 8 Green AI Model-ConfusionMatrix" src="https://github.com/user-attachments/assets/21e517b7-1249-4959-86f8-cb3ec480dbc2" /></p>
+<p>What Fig  1 8 Green AI Model-ConfusionMatrix shows:
+Analogous confusion matrix for the Green AI model family. Comparing Figs. 1.7 and 1.8 highlights where efficiency-driven architectures differ in error profile.
+Undwestanding it:
+- Directly compare per-cell counts between baseline and Green AI matrices to detect shifts in mistake patterns.
+- Observe whether energy-saving changes disproportionately affect certain classes.
+Applications for  this research:
+If Green AI models produce similar diagonals with fewer off-diagonal large errors, then they retain practical utility. Conversely, concentrated degradation on ecologically sensitive classes would caution against blind replacement.
+Practical takeaways:
+- Aim for parity in confusion profiles for high-impact classes. If not achieved, use class-specific fine-tuning.
+</p>
+
 <p></p><img width="691" height="528" alt="Fig  1 4  Baseline Model-Accuracy on Unseen Data (N=315)" src="https://github.com/user-attachments/assets/70ff68bb-54a3-4119-b5b3-2cee7255f8d4" /></p>
-<p></p><img width="1489" height="590" alt="Fig  1 3 Evaluation_ofGreen AI Model_ROC-AOC Curve_Precision-Recall Curve (One-vs-Rest)" src="https://github.com/user-attachments/assets/ee79dea3-7d90-48a3-801f-d91c47ef8a95" /></p>
-<p></p><img width="1489" height="590" alt="Fig  1 2 Evaluation_ofBaselineModels_ROC-AOC Curve_Precision-Recall Curve (One-vs-Rest)" src="https://github.com/user-attachments/assets/af4453bf-7476-4944-9b5c-5c72158e0b26" /></p>
+<p>What Fig  1 4  Baseline Model-Accuracy on Unseen Data (N=315) shows:
+A summary (often bar chart or table) of the baseline model's accuracy and possibly per-class metrics measured on the unseen test set of 315 samples.
+How to read it:
+- Overall accuracy gives a single-number performance estimate on held-out data. Per-class bars or errors show uneven performance across labels.
+- Confidence intervals or bootstrapped error bars (if present) quantify uncertainty in the accuracy estimate.
+Why it matters for this research:
+Unseen-data accuracy is the operationally meaningful metric. It connects model development choices (architectures, augmentations) to real-world expectations and is essential when mapping classification outputs to sustainability actions.
+Practical takeaways:
+- Prefer models that demonstrate both high unseen accuracy and low carbon cost.
+- Use per-class accuracy to plan mitigation strategies for weak classes (relabeling, augmentation).
+</p>
+
+<p><img width="1489" height="590" alt="Fig  1.3 Evaluation_ofGreen AI Model_ROC-AOC Curve_Precision-Recall Curve (One-vs-Rest)" src="https://github.com/user-attachments/assets/ee79dea3-7d90-48a3-801f-d91c47ef8a95" /></p>
+
+<p>What Evaluation_ofGreen AI Model_ROC-AOC Curve_Precision-Recall Curve (One-vs-Rest) shows:
+Same metrics as Fig. 1.2 but for lightweight architectures (micro-CNN, EfficientNetB0/MobileNetV2 variants). The figure may overlay per-class ROC/PR curves for multiple Green AI models for direct comparison.
+How it applies:
+- Compare per-class AUC/AP between the Green AI family and the baseline network. If Green AI curves closely match baseline curves, the reduced compute footprint retains discriminative ability.
+- Differences in PR curves for ambiguous classes indicate where architecture choices (e.g., transfer learning vs. micro-CNN) matter most.
+Why it matters for this research:
+This figure provides direct visual evidence of the central claim: lightweight, efficient models can achieve near-baseline discrimination while incurring lower energy costs. It supports selection of Pareto-efficient models for deployment.
+Practical takeaways:
+- Use this comparison to choose a model that minimizes CO₂e for an acceptable accuracy/AP trade-off.
+- Where PR diverges, consider class-specific thresholds or ensembling.
+</p>
+
+<p></p><img width="1489" height="590" alt="Fig  1.2 Evaluation_ofBaselineModels_ROC-AOC Curve_Precision-Recall Curve (One-vs-Rest)" src="https://github.com/user-attachments/assets/af4453bf-7476-4944-9b5c-5c72158e0b26" /></p>
+
+<p>Fig. 1.2 — Baseline Models: ROC-AUC and Precision–Recall (One-vs-Rest) shows:
+For multi-class classification, one-vs-rest ROC and PR curves plot per-class discriminative performance by treating each class as the positive class against all others. The ROC curve shows true positive rate (TPR) vs. false positive rate (FPR) while the PR curve shows precision vs. recall.
+How to read it:
+- ROC AUC near 1.0 indicates excellent ranking across thresholds. However, ROC can be optimistic with class imbalance.
+- PR curves are more informative for lower-prevalence classes — a high area under the PR curve (average precision) indicates high precision at useful recall levels.
+- Compare curves across classes to see which categories the baseline network favors or struggles with.
+Why it matters for this research:
+Baseline networks often set the performance ceiling. Fig. 1.2 documents where the baseline achieves strong discrimination and which classes are problematic. Coupled with carbon metrics, these curves help decide whether a marginal AUC improvement justifies additional CO₂e.
+Practical takeaways:
+- Prefer PR metrics for imbalanced categories.
+- Identify classes with low AP (average precision) for targeted augmentation or architecture tweaks.
+</p>
+
 <p></p><img width="1103" height="1005" alt="Fig, 1 7 Baseline Green AI Model-Confusion Matrix" src="https://github.com/user-attachments/assets/f01fdd06-04ce-4d56-92dd-f0a33e4c1d78" /></p>
+
+<p>Fig. 1.7 — Baseline Model Confusion Matrix (Raw Counts) indicates:
+A matrix of raw counts where rows are true classes and columns are predicted classes (or vice versa). Each cell indicates how many samples of a true class were predicted as a given class.
+How to read it:
+- Diagonal cells indicate correct classifications; off-diagonals show error modes.
+- Large off-diagonal blocks point to systematic confusion between groups of classes (e.g., different residential densities).
+Its implications for this research:
+Raw-count confusion matrices reveal absolute error burdens and are helpful when class prevalence matters for operational impact (e.g., misclassifying forest as built-up has different consequences than misclassifying two residential types).
+Practical takeaways:
+- Use raw counts when assessing absolute false-positive rates for critical classes.
+- Investigate frequent off-diagonal errors for targeted remediation.
+</p>
 
 <h1><p>7.1. Summary of the End-to-End Carbon-Tracked Pipeline</p></h1>
 
