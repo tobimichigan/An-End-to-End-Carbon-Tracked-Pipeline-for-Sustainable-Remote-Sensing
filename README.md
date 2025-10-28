@@ -148,8 +148,10 @@ Our experiments show that high accuracy and low environmental impact are compati
 
 <h1><p>Acknowledgments</p></h1>
 
-<p>Green Reliable Software Budapest. Kaggle Community Olympiad - HACK4EARTH Green AI. https://kaggle.com/competitions/kaggle-community-olympiad-hack-4-earth-green-ai, 2025. Kaggle.
-Yi Yang and Shawn Newsam, "Bag-Of-Visual-Words and Spatial Extensions for Land-Use Classification," ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems (ACM GIS), 2010. </p>
+<p>Green Reliable Software Budapest. Kaggle Community Olympiad - HACK4EARTH Green AI. https://kaggle.com/competitions/kaggle-community-olympiad-hack-4-earth-green-ai, 2025. Kaggle.</p>
+
+<h1>UC Merced Land Use Dataset</h1>
+<p>Yi Yang and Shawn Newsam, "Bag-Of-Visual-Words and Spatial Extensions for Land-Use Classification," ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems (ACM GIS), 2010. </p>
 
 <p>Shawn D. Newsam Assistant Professor and Founding Faculty Electrical Engineering & Computer Science University of California, Merced Email: s****@ucmerced.edu 
 Web: http://faculty.ucmerced.edu/snewsam </p>
